@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo"><span class="logo-icon">☀️</span> Weather Now</div>
+    <button class="units" onclick="hover()">⚙️ Units ▾</button>
+    <ul id="uhover">
+      <li><button onclick="imp()">Switch to Imperial</button></li>
+      <li><p>Temperature</p></li>
+      <li><button onclick="celsius()">Celsius (&deg;C)</button></li>
+      <li><button onclick="far()">Fahrenheit (&deg;F)</button></li>
+      <li><p>Wind Speed</p></li>
+      <li><button onclick="kmh()">km/h</button></li>
+      <li><button onclick="mph()">mph</button></li>
+      <li><p>Precipitation</p></li>
+      <li><button onclick="mm()">Millimeters (mm)</button></li>
+      <li><button onclick="inch()">Inches (in)</button></li>
+    </ul>
+  </div>
+
+  
+
+  <div class="hero">
+    <h1>How's the sky looking today?</h1>
+  </div>
+
+  <div class="search-row">
+      
+    <input class="search-box" placeholder="Search for a place..."> </input>
+    <button class="search-btn">Search</button>
+  </div>
+
+  <div class="main-grid">
+    <div>
+      <div class="current-card">
+
+    <!-- Weather Loader -->
+          <div class="weather-loader" id="weatherLoader">
+              <div class="loader-ring"></div>
+              <div class="loader-text">Loading Weather...</div>
+          </div>
+
+
+        <div class="city" id="location">Berlin, Germany</div>
+        <div class="date" id="ctime">--</div>
+        <div class="temp-row">
+          <div id="weatherName" class="weather-name">Loading...</div>
+          <span class="sun-icon" id="weathcode">--</span>
+          
+          <span class="temp-big" id="temp">--</span>
+          
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Feels Like</div>
+          <div class="stat-value" id="apparent">--</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-label">Humidity</div>
+          <div class="stat-value" id="humidity">--</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-label">Wind</div>
+          <div class="stat-value" id="wind">--</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Precipitation</div>
+          <div class="stat-value" id="precipitation">--</div>
+        </div>
+      </div>
+
+      <div class="daily-title">Daily forecast</div>
+      <div class="daily-grid">
+        <div class="day-card">
+          <div class="day-name"  id="dday0">--</div>
+          <div class="day-icon" id="dwc0">--</div>
+          <div class="day-temps">
+          <span class="high" id="dmax0">--</span>
+          <span class="low" id="dmin0">--</span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday1">--</div>
+          <div class="day-icon" id="dwc1">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax1">--</span>
+            <span class="low" id="dmin1"></span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday2">--</div>
+          <div class="day-icon" id="dwc2">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax2">--</span>
+            <span class="low" id="dmin2">--</span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday3">--</div>
+          <div class="day-icon" id="dwc3">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax3">--</span>
+            <span class="low" id="dmin3">--</span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday4">--</div>
+          <div class="day-icon" id="dwc4">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax4">--</span>
+            <span class="low" id="dmin4">--</span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday5">--</div>
+          <div class="day-icon" id="dwc5">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax5">--</span>
+            <span class="low" id="dmin5">--</span>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-name" id="dday6">--</div>
+          <div class="day-icon" id="dwc6">--</div>
+          <div class="day-temps">
+            <span class="high" id="dmax6">--</span>
+            <span class="low" id="dmin6">--</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hourly-panel">
+      <div class="hourly-header">
+        <h3>Hourly forecast</h3>
+        <div class="day-select" id="daySelectBtn">Tuesday ▾</div>
+      </div>
+      <ul class="daymenu" id="daymenu">
+        <li><button>Monday</button></li>
+        <li><button>Tuesday</button></li>
+        <li><button>Wednesday</button></li>
+        <li><button>Thursday</button></li>
+        <li><button>Friday</button></li>
+        <li><button>Saturday</button></li>
+        <li><button>Sunday</button></li>
+      </ul>
+      <div class="hourList">
+
+      <div class="hour-row">
+        <div class="hour-left">
+          <span class="hour-icon">--</span>
+          <span>3 PM</span>
+      </div><span class="hour-temp">--</span>
+    </div>
+    
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>4 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>5 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>6 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>7 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>8 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>9 PM</span>
+      </div><span class="hour-temp">--</span></div>
+      <div class="hour-row"><div class="hour-left"><span class="hour-icon">--</span><span>10 PM</span>
+      </div><span class="hour-temp">--</span></div>
+    </div>
+  </div>
+  </div>
+
+</body>
+<script src="script.js"></script> 
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="lat"></h1>
+    <h1 id="lon"></h1>
+    <!-- <h2 id="weathcode"> -- </h2> -->
+    <div class="hourly">
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        <section class="hourlysec">
+            <h3>--</h3>
+        </section>
+        
+    </div>
+    </div>
+    <script>
+        function geo(){
+            navigator.geolocation.getCurrentPosition(function(position){
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+                document.getElementById("lat").innerHTML = lat;
+                document.getElementById("lon").innerHTML = lon;
+                weather(lat,lon);
+            })
+        }
+
+        async function weather(lat,lon){
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code`;
+            let result = await fetch(url);
+            let data = await result.json();
+            let temp = data.current.temperature_2m;
+            let wc = data.current.weather_code;
+            // console.log(temp);
+
+            let weathcode = document.querySelector('#weathcode');
+
+            if(0<=wc<1){
+                weathcode.innerHTML = 'Sunny'
+            }
+            
+            const hourly = document.querySelectorAll('.hourlysec');
+
+            for(let i=0;i<7;i++){
+                const htemp = data.hourly.temperature_2m[i];
+                hourly[i].querySelector('h3').innerHTML = htemp;
+
+                // console.log(i)
+                // console.log(htemp);
+
+            }   
+
+        }   
+        geo();
+
+    </script>
+</body>
+</html>
+
